@@ -7,6 +7,7 @@ public class AccountDto {
         return customerNumber;
     }
 
+
     public void setCustomerNumber(String customerNumber) {
         this.customerNumber = customerNumber;
     }
