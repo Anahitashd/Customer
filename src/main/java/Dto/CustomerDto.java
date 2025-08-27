@@ -1,23 +1,11 @@
-package model;
+package Dto;
 
-import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NonNull
+public class CustomerDto {
     private String firstName;
-    @NonNull
     private String lastName;
-    @NonNull
     private String phoneNumber;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Account> accounts = new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -41,13 +29,5 @@ public class Customer {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
     }
 }
