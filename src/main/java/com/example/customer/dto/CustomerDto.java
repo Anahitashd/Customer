@@ -1,4 +1,4 @@
-package com.example.customer.Dto;
+package com.example.customer.dto;
 
 public class CustomerDto {
     private String firstName;
