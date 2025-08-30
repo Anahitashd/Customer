@@ -1,6 +1,4 @@
-package Dto;
-
-import org.springframework.lang.NonNull;
+package com.example.customer.Dto;
 
 public class CustomerDto {
     private String firstName;

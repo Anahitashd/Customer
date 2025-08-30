@@ -1,7 +1,7 @@
-package service;
+package com.example.customer.service;
 
 import org.springframework.stereotype.Service;
-import repository.AccountRepository;
+import com.example.customer.repository.AccountRepository;
 
 @Service
 public class AccountService {
@@ -9,7 +9,5 @@ public class AccountService {
 
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
-
-
     }
 }
