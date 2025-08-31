@@ -5,6 +5,7 @@ import com.example.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 import com.example.customer.repository.AccountRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,9 @@ public class AccountService {
         this.customerRepository = customerRepository;
     }
 
+    public List<Account> findAllAccounts() {
+        return accountRepository.findAll();
+    }
     public Optional<Account> getAccountById(Long accountId) {
         return accountRepository.findById(accountId);
     }
