@@ -1,14 +1,12 @@
 package com.example.customer.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class AccountDto {
 
     private String customerNumber;
 
-    public String getCustomerNumber() {
-        return customerNumber;
-    }
-    public void setCustomerNumber(String customerNumber) {
-        this.customerNumber = customerNumber;
-    }
 }

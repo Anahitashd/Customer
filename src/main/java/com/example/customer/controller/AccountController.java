@@ -42,7 +42,8 @@ public class AccountController {
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
         Account entity = accountMapper.toEntity(accountDto);
         Account save = accountService.createAccount(entity);
-        accountDto dto  = accountMapper.toDTO(save);
+        AccountDto dto  = accountMapper.toDTO(save);
+        return ResponseEntity.ok(dto);
 
     }
 }
