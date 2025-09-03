@@ -1,30 +1,48 @@
 package com.example.customer.controller;
 
+import com.example.customer.config.AccountMapper;
+import com.example.customer.dto.AccountDto;
 import com.example.customer.model.Account;
-import com.example.customer.repository.AccountRepository;
+import com.example.customer.model.Customer;
 import com.example.customer.service.AccountService;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
-    private AccountRepository accountRepository;
-    private AccountService accountService;
+    private final AccountService accountService;
+    private final AccountMapper accountMapper;
 
-    public void setAccountRepository(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public AccountController(AccountService accountService, AccountMapper accountMapper) {
+        this.accountService = accountService;
+        this.accountMapper = accountMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Account>> getAccounts() {
-        return new ResponseEntity<>(accountService.findAllAccounts() , HttpStatus.OK);
+    public List<AccountDto> getAccounts() {
+        return accountService.findAllAccounts()
+                .stream()
+                .map(accountMapper::toDTO)
+                .toList();
+    }
+
+    @GetMapping("{accountId}")
+    public ResponseEntity<AccountDto> getAccount(@PathVariable("accountId") Long accountId) {
+        return accountService.getAccountById(accountId)
+                .map(accountMapper::toDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
+        Account entity = accountMapper.toEntity(accountDto);
+        Account save = accountService.createAccount(entity);
+        accountDto dto  = accountMapper.toDTO(save);
+
     }
 }

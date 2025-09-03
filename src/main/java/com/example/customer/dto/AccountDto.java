@@ -1,5 +1,6 @@
 package com.example.customer.dto;
 
+
 public class AccountDto {
 
     private String customerNumber;
