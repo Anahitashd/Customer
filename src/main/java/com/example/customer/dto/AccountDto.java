@@ -8,5 +8,7 @@ import lombok.Setter;
 public class AccountDto {
 
     private String customerNumber;
+    private String accountNumber;
+    private Integer balance;
 
 }
