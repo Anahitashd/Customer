@@ -1,8 +1,6 @@
 package com.example.customer.service;
 
-import com.example.customer.dto.AccountDto;
 import com.example.customer.model.Account;
-import com.example.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 import com.example.customer.repository.AccountRepository;
 

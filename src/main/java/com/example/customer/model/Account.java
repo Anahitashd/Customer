@@ -9,7 +9,12 @@ import org.springframework.lang.NonNull;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "account_seq")
+    @SequenceGenerator(
+            name = "account_seq",
+            sequenceName = "account_sequence",
+            allocationSize = 1
+    )
     private Long id;
     @NonNull
     private String accountNumber;

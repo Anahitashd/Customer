@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 public interface AccountMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "customer", ignore = true)
     Account toEntity(AccountDto dto);
 
     AccountDto toDTO(Account entity);

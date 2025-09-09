@@ -11,7 +11,12 @@ import java.util.List;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "customer_seq")
+    @SequenceGenerator(
+            name = "customer_seq",
+            sequenceName = "customer_sequence",
+            allocationSize = 1
+    )
     private Long id;
     @NonNull
     private String firstName;

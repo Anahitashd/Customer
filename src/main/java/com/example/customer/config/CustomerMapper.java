@@ -1,6 +1,6 @@
 package com.example.customer.config;
 
-import com.example.customer.dto.AccountDto;
+
 import com.example.customer.dto.CustomerDto;
 import com.example.customer.model.Customer;
 import org.mapstruct.*;
