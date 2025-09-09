@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.lang.NonNull;
 
-@Setter
-@Getter
+
 @Entity
 public class Account {
     @Id
@@ -21,4 +20,47 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @NonNull
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(@NonNull String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    @NonNull
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(@NonNull Integer balance) {
+        this.balance = balance;
+    }
+
+    @NonNull
+    public String getCustomerNumber() {
+        return customerNumber;
+    }
+
+    public void setCustomerNumber(@NonNull String customerNumber) {
+        this.customerNumber = customerNumber;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
