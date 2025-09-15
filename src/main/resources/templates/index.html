@@ -7,6 +7,11 @@ xmlns:th="http://www.thymeleaf.org"
     <title>AnahitaBank</title>
 </head>
 <body>
-<h2> the:text="${message}"</h2>
+<h1>Welcome to GeeksForGeeks...</h1>
+<div id="one">
+    <h1 th:text="${message}">
+        <span>message will print here</span>
+    </h1>
+</div>
 </body>
 </html>
