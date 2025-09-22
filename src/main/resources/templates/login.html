@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+        }
+        .login-box {
+            width: 350px;
+            padding: 30px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <h3 class="text-center mb-4">Login</h3>
+
+    <!-- Spring Security automatically maps username/password -->
+    <form method="post" th:action="@{/login}">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" name="username" class="form-control"
+                   placeholder="Enter username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control"
+                   placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+
+    <!-- Optional error/success messages -->
+    <div th:if="${param.error}" class="text-danger mt-3 text-center">
+        Invalid username or password
+    </div>
+    <div th:if="${param.logout}" class="text-success mt-3 text-center">
+        You have been logged out.
+    </div>
+</div>
+
+</body>
+</html>

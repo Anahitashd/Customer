@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomePage {
 
-    @GetMapping("/")   // mapping for home page
+    @GetMapping("/customer")   // mapping for home page
     public String home(Model model) {
         model.addAttribute("message", "Welcome to the Bank Project!");
         return "index"; // matches templates/index.html
