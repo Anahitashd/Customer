@@ -1,7 +1,6 @@
 package com.example.customer.controller;
 
 import com.example.customer.model.Customer;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,6 @@ public class DashboardController {
         String apiUrl = "http://localhost:8080/api/accounts";
         ResponseEntity<Customer[]> response = restTemplate.getForEntity(apiUrl, Customer[].class);
         List<Customer> accounts = Arrays.asList(response.getBody());
-
         model.addAttribute("accounts", accounts);
         return "dashboard"; // dashboard.html must exist
     }
