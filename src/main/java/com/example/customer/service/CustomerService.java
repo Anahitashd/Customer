@@ -1,5 +1,7 @@
 package com.example.customer.service;
 
+import com.example.customer.config.CustomerMapper;
+import com.example.customer.dto.CustomerDto;
 import com.example.customer.model.Customer;
 import com.example.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -9,10 +11,12 @@ import java.util.Optional;
 
 @Service
 public class CustomerService {
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
 
     public List<Customer> getAllCustomer() {
@@ -23,7 +27,9 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public void saveCustomer(CustomerDto customerDto) {
+        Customer customer = customerMapper.toEntity(customerDto);
+        customer = customerRepository.save(customer);
+        customerMapper.toDTO(customer);
     }
 }

@@ -1,48 +1,39 @@
 package com.example.customer.controller;
 
-import com.example.customer.config.CustomerMapper;
+
 import com.example.customer.dto.CustomerDto;
 import com.example.customer.model.Customer;
 import com.example.customer.service.CustomerService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
 
     private final CustomerService customerService;
-    private final CustomerMapper customerMapper;
 
-    public CustomerController(CustomerMapper customerMapper, CustomerService customerService) {
-        this.customerMapper = customerMapper;
+    public CustomerController( CustomerService customerService) {
         this.customerService = customerService;
     }
 
     @GetMapping
-    public List<CustomerDto> getAccounts() {
-        return customerService.getAllCustomer()
-                .stream()
-                .map(customerMapper::toDTO)
-                .toList();
+    public ResponseEntity<List<Customer>> getAllAccounts() {
+        List <Customer> all = customerService.getAllCustomer();
+        return new ResponseEntity<>(all,HttpStatus.OK);
     }
 
     @GetMapping("{customerId}")
-    public ResponseEntity<CustomerDto> getAccountById(@PathVariable("customerId") long customerId) {
-        return customerService.getCustomerById(customerId)
-                .map(customerMapper::toDTO)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-
+    public ResponseEntity<Optional<Customer>> getAccountById(@PathVariable("customerId") long customerId) {
+        return ResponseEntity.ok(this.customerService.getCustomerById(customerId));
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDto> createAccount(@RequestBody CustomerDto customerDto) {
-        Customer entity = customerMapper.toEntity(customerDto);
-        Customer save =customerService.createCustomer(entity);
-        CustomerDto dto = customerMapper.toDTO(save);
-        return ResponseEntity.ok(dto);
+    public String saveCustomer(@ModelAttribute CustomerDto customerDto) {
+        customerService.saveCustomer(customerDto);
+        return "redirect:/customers";
     }
 }
