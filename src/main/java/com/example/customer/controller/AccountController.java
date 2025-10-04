@@ -3,12 +3,14 @@ package com.example.customer.controller;
 import com.example.customer.config.AccountMapper;
 import com.example.customer.dto.AccountDto;
 import com.example.customer.model.Account;
+import com.example.customer.model.Customer;
 import com.example.customer.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -29,11 +31,8 @@ public class AccountController {
     }
 
     @GetMapping("{accountId}")
-    public ResponseEntity<AccountDto> getAccount(@PathVariable("accountId") Long accountId) {
-        return accountService.getAccountById(accountId)
-                .map(accountMapper::toDTO)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Optional<Account>> getAccount(@PathVariable("accountId") Long accountId) {
+        return ResponseEntity.ok(this.accountService.getAccountById(accountId));
     }
 
     @PostMapping
