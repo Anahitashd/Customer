@@ -3,7 +3,6 @@ package com.example.customer.controller;
 import com.example.customer.config.AccountMapper;
 import com.example.customer.dto.AccountDto;
 import com.example.customer.model.Account;
-import com.example.customer.model.Customer;
 import com.example.customer.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,10 +39,8 @@ public class AccountController {
 
     @PostMapping
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
-        Account entity = accountMapper.toEntity(accountDto);
-        Account save = accountService.createAccount(entity);
-        AccountDto dto  = accountMapper.toDTO(save);
-        return ResponseEntity.ok(dto);
+        AccountDto saveAccount =accountService.createAccount(accountDto);
+        return ResponseEntity.ok(saveAccount);
 
     }
 }

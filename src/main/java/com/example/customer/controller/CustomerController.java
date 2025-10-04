@@ -1,6 +1,7 @@
 package com.example.customer.controller;
 
 
+import com.example.customer.config.CustomerMapper;
 import com.example.customer.dto.CustomerDto;
 import com.example.customer.model.Customer;
 import com.example.customer.service.CustomerService;
@@ -15,9 +16,11 @@ import java.util.Optional;
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final CustomerMapper customerMapper;
 
-    public CustomerController( CustomerService customerService) {
+    public CustomerController(CustomerService customerService, CustomerMapper customerMapper) {
         this.customerService = customerService;
+        this.customerMapper = customerMapper;
     }
 
     @GetMapping
@@ -32,8 +35,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public String saveCustomer(@ModelAttribute CustomerDto customerDto) {
-        customerService.saveCustomer(customerDto);
-        return "redirect:/customers";
+    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody CustomerDto customerDto) {
+        CustomerDto savedCustomer = customerService.saveCustomer(customerDto);
+        return ResponseEntity.ok(savedCustomer);
     }
 }

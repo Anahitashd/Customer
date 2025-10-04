@@ -27,9 +27,9 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
-    public void saveCustomer(CustomerDto customerDto) {
+    public CustomerDto saveCustomer(CustomerDto customerDto) {
         Customer customer = customerMapper.toEntity(customerDto);
-        customer = customerRepository.save(customer);
-        customerMapper.toDTO(customer);
+        Customer savedCustomer = customerRepository.save(customer);
+        return customerMapper.toDTO(savedCustomer);
     }
 }
