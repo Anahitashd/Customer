@@ -4,6 +4,7 @@ import com.example.customer.config.AccountMapper;
 import com.example.customer.dto.AccountDto;
 import com.example.customer.model.Account;
 import com.example.customer.service.AccountService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +23,9 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<AccountDto> getAccounts() {
-        return accountService.findAllAccounts()
-                .stream()
-                .map(accountMapper::toDTO)
-                .toList();
+    public ResponseEntity<List<Account>> getAccounts() {
+        List<Account> all= accountService.findAllAccounts();
+        return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
     @GetMapping("{accountId}")

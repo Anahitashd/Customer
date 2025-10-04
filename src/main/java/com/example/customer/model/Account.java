@@ -1,10 +1,7 @@
 package com.example.customer.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.lang.NonNull;
-
 
 @Entity
 public class Account {
