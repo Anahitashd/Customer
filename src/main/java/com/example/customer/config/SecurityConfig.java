@@ -22,7 +22,7 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/customers/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
