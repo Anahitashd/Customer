@@ -2,7 +2,6 @@ package com.example.customer.controller;
 
 
 import com.example.customer.config.CustomerMapper;
-import com.example.customer.dto.AccountDto;
 import com.example.customer.dto.CustomerDto;
 import com.example.customer.model.Customer;
 import com.example.customer.service.CustomerService;
