@@ -1,5 +1,6 @@
 package com.example.customer.controller;
 
+import com.example.customer.service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
+    private final CustomerService customerService;
+
+    public DashboardController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     @GetMapping
     public String dashboard() {
         return "dashboard";
@@ -16,13 +23,17 @@ public class DashboardController {
 
     @GetMapping("/customer")
     public String customer() {
-        // Do something here — call service, prepare model data, etc.
+        customerService.getAllCustomer();
         return "customer"; // this will open apiPage.html
+    }
+
+    @GetMapping("/addCustomer")
+    public String addCustomer() {
+        return "addCustomer";
     }
 
     @GetMapping("/account")
     public String account() {
-        // Do something here — call service, prepare model data, etc.
-        return "account"; // this will open apiPage.html
+        return "account";
     }
 }

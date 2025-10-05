@@ -7,12 +7,12 @@
 </head>
 <body class="container mt-4">
 
-<h2>Customer Accounts Dashboard</h2>
+<h2>Account Dashboard</h2>
 
 <table class="table table-bordered table-hover" id="accountsTable">
     <thead class="table-dark">
     <tr>
-        <th>ID</th>
+        <th>Customer</th>
         <th>Account Number</th>
         <th>Balance</th>
         <th>Customer Number</th>
@@ -31,7 +31,7 @@
             data.forEach(acc => {
                 rows += `
                         <tr>
-                            <td>${acc.id}</td>
+                            <td>${acc.customer}</td>
                             <td>${acc.accountNumber}</td>
                             <td>${acc.balance}</td>
                             <td>${acc.customerNumber}</td>
