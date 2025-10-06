@@ -4,34 +4,67 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Easiest Way to Add Input Masks to Your Forms</title>
+    <title>Create Customer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/assets/css/style.css}">
 </head>
 <body>
 <div class="registration-form">
-    <form th:action="@{/signup}" method="post" th:object="${blogUser}">
-
+    <form id="customer-form">
         <div class="form-icon">
             <span><i class="icon icon-user"></i></span>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control item" id="firstname" placeholder="First name" name="firstName">
+            <input type="text" class="form-control item" id="firstname" placeholder="First name" required>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control item" id="lastname" placeholder="Last name" name="lastName">
+            <input type="text" class="form-control item" id="lastname" placeholder="Last name" required>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control item" id="phone-number" placeholder="Phone Number" name="phoneNumber">
+            <input type="text" class="form-control item" id="phone-number" placeholder="Phone Number" required>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-block create-customer">Create Customer</button>
         </div>
     </form>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-<script src="../static/css/assets/js/script.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    // When the form is submitted
+    $("#customer-form").on("submit", function (e) {
+        e.preventDefault();
+
+        // Build the customer object
+        const customer = {
+            firstName: $("#firstname").val(),
+            lastName: $("#lastname").val(),
+            phoneNumber: $("#phone-number").val()
+        };
+
+        // Send JSON to your backend
+        fetch("/api/customer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(customer)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to create customer");
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert("✅ Customer created successfully:\n" + JSON.stringify(data, null, 2));
+                $("#customer-form")[0].reset();
+            })
+            .catch(err => {
+                alert("❌ Error: " + err.message);
+            });
+    });
+</script>
 </body>
 </html>
